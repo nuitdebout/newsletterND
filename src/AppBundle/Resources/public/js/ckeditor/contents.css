@@ -1,0 +1,29 @@
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+h2 {
+	margin: 15px 0 5px;
+	text-transform: uppercase;
+	color: #CB4C35;
+	font-size: 12px;
+	font-weight: normal;
+	font-family: 'PraxisEF SemiBold', Arial, sans-serif;
+}
+p {
+	margin-bottom: 15px;
+}
+.thumb {
+	position: relative;
+	float: right;
+	margin-right: -290px;
+}
+
+a {
+	color: #cf4c35;
+}
+
+a:hover {
+	text-decoration:underline;
+}

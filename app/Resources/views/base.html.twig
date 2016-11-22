@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="ISO-8859-1" />
+        <title>{% block title %}Communiquez sur la newsletter de Nuit Debout{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/ui-lightness/jquery-ui-1.10.4.min.css') }}">
+        <script src="{{ asset('bundles/app/js/jquery-ui-1.10.4.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/ckeditor/ckeditor.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/admin.js') }}"></script>
+        <script>
+            $(function() {
+                $(".js-datepicker").datepicker();
+                $(".js-datepicker").datepicker("option", "dateFormat", 'yy-mm-dd');
+            });
+        </script>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

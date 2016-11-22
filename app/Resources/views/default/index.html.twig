@@ -1,0 +1,222 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1><span>Communiquez sur la newsletter de Nuit Debout</span></h1>
+            </div>
+
+            <div id="next">
+                <h2>Proposez vos articles, votez pour les contenus les plus importants, contrez les contenus inapropriés</h2>
+                <div id="cadre">
+
+                    <form id="formProposition" action="#" method="post" name="proposition" {{ form_enctype(form) }}>
+                        {{ form_errors(form) }}
+                        {{ form_row (form._token) }}
+                        {{ form_row(form.title) }}
+                        {{ form_row(form.teaser) }}
+                        {{ form_row(form.url) }}
+                        {{ form_row(form.typeProposition) }}
+                        {{ form_row(form.lieu) }}
+                        {{ form_row(form.theme) }}
+                        {{ form_row(form.deadline) }}
+                        {{ form_row(form.description) }}
+
+                        <div id="ajoutDoc"><IMG class="imagePlus" src="{{ asset('bundles/app/images/plus.png') }}" alt="ajout document" /> Cliquer ici pour ajouter des documents</div>
+
+                        <div class="form-document">
+                            <div class="cadre-upload">{{ form_row(form.documents) }}</div>
+                        </div>
+                        <input type="submit" value="Enregistrez">
+                    </form>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+                            var $container = $('div#form_documents');
+
+                            // On ajoute un lien pour ajouter une nouvelle catégorie
+                            var $lienAjout = $('<p class="btn"><a href="#" id="ajout_document">Ajouter un document</a></p>');
+                            $container.append($lienAjout);
+
+                            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+                            $lienAjout.click(function(e) {
+                                ajouterDocument($container);
+                                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                                return false;
+                            });
+
+                            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+                            var index = $container.find(':input').length;
+
+                            // On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
+                            if (index == 0) {
+                                ajouterDocument($container);
+                            } else {
+                                // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+                                $container.children('div').each(function() {
+                                    ajouterLienSuppression($(this));
+                                });
+                            }
+
+                            // La fonction qui ajoute un formulaire Document
+                            function ajouterDocument($container) {
+                                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                                // - le texte "__name__label__" qu'il contient par le label du champ
+                                // - le texte "__name__" qu'il contient par le numéro du champ
+                                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Document n°' + (index+1))
+                                        .replace(/__name__/g, index)
+                                        .replace('class="required"', 'class="labelDoc"'));
+
+                                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                                ajouterLienSuppression($prototype);
+
+                                // On ajoute le prototype modifié à la fin de la balise <div>
+                                $container.append($prototype);
+
+                                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                                index++;
+                            }
+
+                            // La fonction qui ajoute un lien de suppression d'une catégorie
+                            function ajouterLienSuppression($prototype) {
+                                // Création du lien
+                                $lienSuppression = $('<p class="btn btn-danger"><a href="#">Supprimer</a></p>');
+
+                                // Ajout du lien
+                                $prototype.append($lienSuppression);
+
+                                // Ajout du listener sur le clic du lien
+                                $lienSuppression.click(function(e) {
+                                    $prototype.remove();
+                                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                                    return false;
+                                });
+                            }
+                        });
+                    </script>
+                </div>
+            </div>
+            <div id="next">
+                <h2>Prochaine Newsletter (envoi prévu le 1er décembre 2016)</h2>
+                <p><a href="#">Voir la newsletter précedente</a> </p>
+
+
+                {% if arrayProposition|length > 0 %}
+                    {% for item in arrayProposition %}
+
+                        {% set cheminDoc = "" %}
+                        {% for document in item.getDocuments %}
+                            {% set ext = document.getWebDoc|split('.') %}
+                            {% if ext[1] == "jpeg" or ext[1] == "png" %}
+                                {% set cheminDoc = document.getWebDoc %}
+                            {% endif %}
+                        {% endfor %}
+
+
+
+                        <div id="cadre">
+                            <div id="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
+                            <div>{{ item.getTitle }}</div>
+                            <div>{{ item.getTeaser }}</div>
+                            <div><a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
+                            <div>{{ item.getTheme }}</div>
+                            <div id="imgAction">
+                                <a href="{{ path('proposition_monte', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/monte.png') }}"></a>
+                                <a href="{{ path('proposition_descend', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/descend.png') }}"></a>
+                                <a href="{{ path('proposition_interdit', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/interdit.png') }}"></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+             </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+    h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+    h1 { font-size: 36px; }
+    h2 { font-size: 21px; margin-bottom: 1em; }
+    p { margin: 0 0 1em 0; }
+    a { color: #0000F0; }
+    a:hover { text-decoration: none; }
+    code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+    #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+    #container { padding: 2em; }
+    #cadre { border: solid 1px; }
+    #welcome, #status { margin-bottom: 2em; }
+    #welcome h1 span { display: block; font-size: 75%; }
+    #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
+    #icon-book { display: none; }
+    #imgAction img {width: 40px; height: 40px;}
+    #imgPres img {width: 240px; height: 140px;}
+
+    @media (min-width: 768px) {
+        #wrapper { width: 80%; margin: 2em auto; }
+        #icon-book { display: inline-block; }
+        #status a, #next a { display: block; }
+
+        @-webkit-keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        @keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
+        .sf-toolbar { opacity: 0; -webkit-animation: fade-in 1s .2s forwards; animation: fade-in 1s .2s forwards;}
+    }
+
+
+    .btn{
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        text-align: center;
+        top: 10px;
+    }
+
+    .btn a {
+        top: 10px;
+        color: #3F3F3F;
+        font-weight: bold;
+        font-size: 12px;
+
+    }
+
+    .btn-danger{
+        background-color: red;
+    }
+
+    #ajoutDoc{
+        text-align: center;
+        font-size: 16px;
+        margin: 43px auto;
+    }
+
+    .imagePlus{
+        height: 30px;
+        width: 30px;
+    }
+
+    .ui-datepicker-trigger{
+        height: 30px;
+        width: 30px;
+    }
+
+    .cadre-form{
+        border: 1px solid #efc100;
+        width: 841px;
+    }
+
+    .cadre-upload{
+        border: 1px solid #efc100;
+        width: 684px;
+    }
+
+    #form_documents label{
+        width: 33em;
+    }
+
+    #form_documents .labelDoc{
+        margin-left: -61px;
+        width: 15em;
+    }
+</style>
+{% endblock %}
