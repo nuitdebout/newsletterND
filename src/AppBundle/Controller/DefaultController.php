@@ -27,11 +27,11 @@ class DefaultController extends Controller
         $proposition->setDeadline(new \DateTime('tomorrow'));
 
         $form = $this->createFormBuilder($proposition)
-            ->add('title', TextType::class, array('label' => 'Titre* : ', 'required'    => true))
-            ->add('teaser', TextType::class, array('label' => 'Teaser* (140 caractère) : ', 'required'    => true))
-            ->add('url', TextType::class, array('label' => 'Lien à partager* : ', 'required'    => true))
+            ->add('title', TextType::class, array('label' => 'Titre(*) : ', 'required'    => true))
+            ->add('teaser', TextType::class, array('label' => 'Teaser(*) (140 caractère) : ', 'required'    => true))
+            ->add('url', TextType::class, array('label' => 'Lien à partager(*) : ', 'required'    => true))
             ->add('typeProposition', ChoiceType::class, array(
-                'label' => 'Type de proposition : ',
+                'label' => 'Type de proposition(*) : ',
                 'required'    => true,
                 'choice_list' => new ChoiceList(
                     array(1, 2, 3),
