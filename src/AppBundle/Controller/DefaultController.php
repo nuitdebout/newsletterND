@@ -28,8 +28,8 @@ class DefaultController extends Controller
 
         $form = $this->createFormBuilder($proposition)
             ->add('title', TextType::class, array('label' => 'Titre(*) : ', 'required'    => true))
-            ->add('teaser', TextType::class, array('label' => 'Teaser(*) (140 caractère) : ', 'required'    => true))
-            ->add('url', TextType::class, array('label' => 'Lien à partager(*) : ', 'required'    => true))
+            ->add('teaser', TextType::class, array('label' => 'Teaser(*) (140 caractÃ¨re) : ', 'required'    => true))
+            ->add('url', TextType::class, array('label' => 'Lien Ã  partager(*) : ', 'required'    => true))
             ->add('typeProposition', ChoiceType::class, array(
                 'label' => 'Type de proposition(*) : ',
                 'required'    => true,
@@ -38,13 +38,13 @@ class DefaultController extends Controller
                     array('Agenda', 'Action', 'Article')
                 )))
             ->add('lieu', TextType::class, array('label' => 'Lieu : ', 'required'    => false))
-            ->add('theme', TextType::class, array('label' => 'Thèmes ou Commission : ', 'required'    => false))
-            ->add('deadline', DateType::class , array("required" => false,'label' => "Date de l'évènement : ",
+            ->add('theme', TextType::class, array('label' => 'ThÃ¨mes ou Commission : ', 'required'    => false))
+            ->add('deadline', DateType::class , array("required" => false,'label' => "Date de l'Ã©vÃ¨nement : ",
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'js-datepicker','placeholder' => 'facultatif']))
             ->add('description', 'textarea', array(
-                'label' => "Description de l'évènement : ",
+                'label' => "Description de l'Ã©vÃ¨nement : ",
                 'required'    => true,
                 'attr' => array(
                     'class' => 'editor'
