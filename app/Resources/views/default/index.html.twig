@@ -30,7 +30,9 @@
                         <input type="submit" value="Enregistrez">
                     </form>
                     <script type="text/javascript">
+
                         $(document).ready(function() {
+
                             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
                             var $container = $('div#form_documents');
 
@@ -92,6 +94,7 @@
                                     return false;
                                 });
                             }
+
                         });
                     </script>
                 </div>
@@ -112,8 +115,6 @@
                             {% endif %}
                         {% endfor %}
 
-
-
                         <div id="cadre">
                             <div>Position : {{ key + 1 }}</div>
                             <div id="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
@@ -121,6 +122,10 @@
                             <div>{{ item.getTeaser }}</div>
                             <div><a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
                             <div>{{ item.getTheme }}</div>
+                            {% set idDesc = 'desc' ~ key %}
+                            <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
+                            <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
+                            <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
                             <div id="imgAction">
                                 <a href="{{ path('proposition_monte', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/monte.png') }}"></a>
                                 <a href="{{ path('proposition_descend', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/descend.png') }}"></a>

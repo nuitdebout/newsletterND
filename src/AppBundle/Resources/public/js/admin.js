@@ -22,6 +22,18 @@ $(function(){
   
 });
 
+admin.afficheDesc = function(id) {
+  $("#"+id).show();
+  $("#"+id+"_r").show();
+  $("#"+id+"_sp").hide();
+}
+
+admin.cacheDesc = function(id) {
+  $("#"+id).hide();
+  $("#"+id+"_sp").show();
+  $("#"+id+"_r").hide();
+}
+
 admin.selectSite = function() {
   $('#formSelectSite').submit(function(){
     var data = $(this).serialize();
