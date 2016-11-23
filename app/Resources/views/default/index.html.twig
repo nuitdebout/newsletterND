@@ -108,10 +108,12 @@
                     {% for key, item in arrayProposition %}
 
                         {% set cheminDoc = "" %}
-                        {% for document in item.getDocuments %}
+                        {% set break = false %}
+                        {% for document in item.getDocuments if not break %}
                             {% set ext = document.getWebDoc|split('.') %}
                             {% if ext[1] == "jpeg" or ext[1] == "png" %}
                                 {% set cheminDoc = document.getWebDoc %}
+                                {% set break = true %}
                             {% endif %}
                         {% endfor %}
 
@@ -122,10 +124,12 @@
                             <div>{{ item.getTeaser }}</div>
                             <div><a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
                             <div>{{ item.getTheme }}</div>
-                            {% set idDesc = 'desc' ~ key %}
-                            <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
-                            <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
-                            <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
+                            {% if item.getDescription|length > 0 %}
+                                {% set idDesc = 'desc' ~ key %}
+                                <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
+                                <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
+                                <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
+                            {% endif %}
                             <div id="imgAction">
                                 <a href="{{ path('proposition_monte', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/monte.png') }}"></a>
                                 <a href="{{ path('proposition_descend', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/descend.png') }}"></a>
