@@ -7,7 +7,7 @@
             </div>
 
             <div id="next">
-                <h2>Proposez vos articles, votez pour les contenus les plus importants, contrez les contenus inapropriés</h2>
+                <h2>Proposez vos articles, votez pour les contenus les plus importants, contrez les contenus inapropriÃ©s</h2>
                 <div id="cadre">
                     <div>(*) Champs obligatoire</div>
                     <form id="formProposition" action="#" method="post" name="proposition" {{ form_enctype(form) }}>
@@ -33,28 +33,28 @@
 
                         $(document).ready(function() {
 
-                            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+                            // On rÃ©cupÃ¨re la balise <div> en question qui contient l'attribut Â« data-prototype Â» qui nous intÃ©resse.
                             var $container = $('div#form_documents');
 
-                            // On ajoute un lien pour ajouter une nouvelle catégorie
+                            // On ajoute un lien pour ajouter une nouvelle catÃ©gorie
                             var $lienAjout = $('<p class="btn"><a href="#" id="ajout_document">Ajouter un document</a></p>');
                             $container.append($lienAjout);
 
-                            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+                            // On ajoute un nouveau champ Ã  chaque clic sur le lien d'ajout.
                             $lienAjout.click(function(e) {
                                 ajouterDocument($container);
-                                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                                e.preventDefault(); // Ã©vite qu'un # apparaisse dans l'URL
                                 return false;
                             });
 
-                            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+                            // On dÃ©finit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
                             var index = $container.find(':input').length;
 
-                            // On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
+                            // On ajoute un premier champ directement s'il n'en existe pas dÃ©jÃ  un (cas d'un nouvel article par exemple).
                             if (index == 0) {
                                 ajouterDocument($container);
                             } else {
-                                // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+                                // Pour chaque catÃ©gorie dÃ©jÃ  existante, on ajoute un lien de suppression
                                 $container.children('div').each(function() {
                                     ajouterLienSuppression($(this));
                                 });
@@ -62,26 +62,26 @@
 
                             // La fonction qui ajoute un formulaire Document
                             function ajouterDocument($container) {
-                                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                                // Dans le contenu de l'attribut Â« data-prototype Â», on remplace :
                                 // - le texte "__name__label__" qu'il contient par le label du champ
-                                // - le texte "__name__" qu'il contient par le numéro du champ
-                                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Document n°' + (index+1))
+                                // - le texte "__name__" qu'il contient par le numÃ©ro du champ
+                                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Document nÂ°' + (index+1))
                                         .replace(/__name__/g, index)
                                         .replace('class="required"', 'class="labelDoc"'));
 
-                                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                                // On ajoute au prototype un lien pour pouvoir supprimer la catÃ©gorie
                                 ajouterLienSuppression($prototype);
 
-                                // On ajoute le prototype modifié à la fin de la balise <div>
+                                // On ajoute le prototype modifiÃ© Ã  la fin de la balise <div>
                                 $container.append($prototype);
 
-                                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                                // Enfin, on incrÃ©mente le compteur pour que le prochain ajout se fasse avec un autre numÃ©ro
                                 index++;
                             }
 
-                            // La fonction qui ajoute un lien de suppression d'une catégorie
+                            // La fonction qui ajoute un lien de suppression d'une catÃ©gorie
                             function ajouterLienSuppression($prototype) {
-                                // Création du lien
+                                // CrÃ©ation du lien
                                 $lienSuppression = $('<p class="btn btn-danger"><a href="#">Supprimer</a></p>');
 
                                 // Ajout du lien
@@ -90,7 +90,7 @@
                                 // Ajout du listener sur le clic du lien
                                 $lienSuppression.click(function(e) {
                                     $prototype.remove();
-                                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                                    e.preventDefault(); // Ã©vite qu'un # apparaisse dans l'URL
                                     return false;
                                 });
                             }
@@ -100,8 +100,8 @@
                 </div>
             </div>
             <div id="next">
-                <h2>Prochaine Newsletter (envoi prévu le 1er décembre 2016)</h2>
-                <p><a href="#">Voir la newsletter précedente</a> </p>
+                <h2>Prochaine Newsletter (envoi prÃ©vu le 1er dÃ©cembre 2016)</h2>
+                <p><a href="#">Voir la newsletter prÃ©cedente</a> </p>
 
 
                 {% if arrayProposition|length > 0 %}
@@ -128,7 +128,7 @@
                                 {% set idDesc = 'desc' ~ key %}
                                 <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
                                 <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
-                                <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
+                                <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >RÃ©duire</p></div>
                             {% endif %}
                             <div id="imgAction">
                                 <a href="{{ path('proposition_monte', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/monte.png') }}"></a>
