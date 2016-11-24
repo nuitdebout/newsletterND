@@ -28,7 +28,7 @@ class DefaultController extends Controller
 
         $form = $this->createFormBuilder($proposition)
             ->add('title', TextType::class, array('label' => 'Titre(*) : ', 'required'    => true))
-            ->add('teaser', TextType::class, array('label' => 'Teaser(*) (140 caractère) : ', 'required'    => true))
+            ->add('teaser', TextType::class, array('label' => 'Teaser(*) (140 caractères) : ', 'required'    => true))
             ->add('url', TextType::class, array('label' => 'Lien à partager(*) : ', 'required'    => true))
             ->add('typeProposition', ChoiceType::class, array(
                 'label' => 'Type de proposition(*) : ',
