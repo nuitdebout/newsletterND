@@ -40,8 +40,10 @@
                               <div class="col-md-12">{{ form_row(form.url) }}</div>
                             </div>  
                         </div>
-                        
-                        <div class="container-fluid">
+
+                        <div id="afficheLieu" onclick="admin.afficheLieu()"><p >Lieu / Date / Thèmes</p></div>
+
+                        <div id="formDoc" class="container-fluid" style="display: none">
                             <div class="row">
                               <div class="col-md-4">{{ form_row(form.lieu) }}</div>
                               <div class="col-md-4">{{ form_row(form.theme) }}</div>
@@ -49,7 +51,9 @@
                             </div>
                         </div>
 
-                        <div class="container-fluid">
+                        <div id="afficheDoc" onclick="admin.afficheDoc()"><p>Description / Documents(photos)</p></div>
+
+                        <div id="formDoc" class="container-fluid" style="display: none">
                             <div class="row">
                               <div class="col-md-12">
                                     {{ form_row(form.description) }}
@@ -64,8 +68,6 @@
                             </div>
                             </div>
                         </div>
-
-                        
                     </form>
                     <script type="text/javascript">
 

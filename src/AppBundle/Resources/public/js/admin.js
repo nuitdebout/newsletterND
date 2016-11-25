@@ -21,6 +21,14 @@ $(function(){
   });
   
 });
+admin.afficheLieu = function() {
+  $("#formLieu").show();
+  $("#afficheLieu").hide();
+}
+admin.afficheDoc = function() {
+  $("#formDoc").show();
+  $("#afficheDoc").hide();
+}
 
 admin.afficheDesc = function(id) {
   $("#"+id).show();
