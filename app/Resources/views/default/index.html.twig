@@ -156,6 +156,12 @@
                 <h4>Prochaine Newsletter (envoi prévu le 1er décembre 2016)</h4>
                 <p><a href="#">Voir la newsletter précedente</a> </p>
 
+                <div id="entete">
+                    <div class="position">Pos</div>
+                    <div class="imgPres">Image</div>
+                    <div class="textContent">Texte et liens</div>
+                    <div class="imgAction">Voter</div>
+                </div>
 
                 {% if arrayProposition|length > 0 %}
                     {% for key, item in arrayProposition %}
@@ -169,17 +175,17 @@
                                 {% set break = true %}
                             {% endif %}
                         {% endfor %}
-
+                        
                         <div class="cadre">
                             <div class="position">#{{ key + 1 }}</div>
                             <div class="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
                             
                               <div class="textContent">   
-                            <div>{{ item.getTitle }}</div>
-                            <div>{{ item.getLieu }}</div>
-                            <div>{{ item.getTeaser }}</div>
-                            <div><a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
-                            <div>{{ item.getTheme }}</div>
+                            <div>Titre : {{ item.getTitle }}</div>
+                            <div>Lieu : {{ item.getLieu }}</div>
+                            <div>Teaser : {{ item.getTeaser }}</div>
+                            <div>URL : <a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
+                            <div>Thème(s) : {{ item.getTheme }}</div>
                             {% if item.getDescription|length > 0 %}
                                 {% set idDesc = 'desc' ~ key %}
                                 <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
@@ -229,6 +235,17 @@
     code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
     #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
     #container { padding: 2em; }
+    #entete {
+    text-align: center;
+    display: inline-table;
+    min-width: 100%;
+    border-radius: 8px;
+    background: #a2b947;
+    color: #fff;
+    padding: 2px;
+    font-size: 12px; 
+    text-transform: uppercase;
+    }
  .cadre { border: 1px solid #ccc;
     border-radius: 8px;  clear: both;    display: inline-table;
     min-width: 100%; padding:3px;}
