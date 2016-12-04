@@ -76,7 +76,41 @@ class DefaultController extends Controller
                           'DOM-TOM',
                         )
                 )))
-            ->add('theme', TextType::class, array('label' => 'Thèmes ou Commission : ', 'required'    => false))
+            ->add('theme', ChoiceType::class, array(
+                'label' => 'Thématique (*) : ',
+                'required'    => true,
+                'choice_list' => new ChoiceList(
+                    array(
+                        'Arts et culture',
+                        'Communs',
+                        'Democratie',
+                        'Droits Humains',
+                        'Ecologie',
+                        'Economie - Finance',
+                        'Education',
+                        'Immigration et précarité',
+                        'Medias',
+                        'Numerique',
+                        'Juridique',
+                        'Politique',
+                        'Science'
+                    ),
+                    array(
+                        'Arts et culture (Jeux, Architecture, Art, musique, théatre, litterature ...)',
+                        'Communs (Squats, ateliers, FabLab, lieux autogérés, makers...)',
+                        'Democratie (Ateliers, théories, projets, vote...)',
+                        'Droits Humains (Anti-racisme, lgbt, feminisme...)',
+                        'Ecologie (Alternatives, informations, luttes, actions, projets)',
+                        'Economie - Finance (Alternatives, critiques, projets, monnaies...)',
+                        'Education (education populaire, alternatives, infos, actions)',
+                        'Immigration et précarité (Migrants, SDF, Chomeurs ... )',
+                        'Medias (Medias alternatifs, critique des medias, opérations médiatiques)',
+                        'Numerique (Hacktivisme , Logiciels libres, Outils, Block Chain...)',
+                        'Juridique (Défense collective, informations, actions légales)',
+                        'Politique (théories, Elections, institutions, geopolique, france Afrique ... )',
+                        'Science (recherche, critique, sciences humaines et fondamentales)'
+                    )
+                )))
             ->add('deadline', DateType::class , array("required" => false,'label' => "Date de l'évènement : ",
                 'widget' => 'single_text',
                 'html5' => false,
