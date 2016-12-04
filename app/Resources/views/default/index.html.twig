@@ -170,9 +170,11 @@
                             {% endif %}
                         {% endfor %}
 
-                        <div id="cadre">
-                            <div>Position : {{ key + 1 }}</div>
-                            <div id="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
+                        <div class="cadre">
+                            <div class="position">#{{ key + 1 }}</div>
+                            <div class="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
+                            
+                              <div class="textContent">   
                             <div>{{ item.getTitle }}</div>
                             <div>{{ item.getLieu }}</div>
                             <div>{{ item.getTeaser }}</div>
@@ -184,18 +186,23 @@
                                 <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
                                 <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
                             {% endif %}
-                            <div id="imgAction">
+                            </div>
+                            <div class="imgAction">
+                                <div class="voteButton">
                                 <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
                                     <img src="{{ asset('bundles/app/images/monte.png') }}">
-                                </a>
+                                </a></div>
+                                <div class="voteButton">
                                 <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
                                     <img src="{{ asset('bundles/app/images/descend.png') }}">
-                                </a>
+                                </a></div>
+                                <div class="voteButton">
                                 <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
                                     <img src="{{ asset('bundles/app/images/interdit.png') }}">
-                                </a>
+                                </a></div>
                             </div>
                         </div>
+                      
                     {% endfor %}
                 {% endif %}
 
@@ -222,8 +229,10 @@
     code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
     #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
     #container { padding: 2em; }
-    #cadre { border: 1px solid #ccc;
-    border-radius: 8px;}
+ .cadre { border: 1px solid #ccc;
+    border-radius: 8px;  clear: both;    display: inline-table;
+    min-width: 100%; padding:3px;}
+
     #welcome, #status { margin-bottom: 2em; }
     #welcome h1 span {
     display: block;
@@ -238,8 +247,14 @@ color: #fdc9e0;
      }
     #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
     #icon-book { display: none; }
-    #imgAction img {width: 40px; height: 40px;}
-    #imgPres img {width: 240px; height: 140px;}
+  .imgAction { width: 7%; float: right; text-align: right; padding: inherit;}
+  .imgAction img {width: 24px;
+    height: 24px;
+    margin-bottom: 7px;}
+  .imgPres img {max-width: 100%;}
+  .imgPres {float: left; width:20%;padding: inherit;}
+  .textContent {float: left;  width:70%;padding: inherit;}
+  .position {float: left; width:3%;padding: inherit;}
 
     @media (min-width: 768px) {
         #wrapper { width: 80%; margin: 2em auto; }
