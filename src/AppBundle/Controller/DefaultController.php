@@ -37,7 +37,45 @@ class DefaultController extends Controller
                     array(1, 2, 3),
                     array('Agenda', 'Action', 'Article')
                 )))
-            ->add('lieu', TextType::class, array('label' => 'Lieu : ', 'required'    => false))
+            ->add('lieu', ChoiceType::class, array(
+                'label' => 'Lieu (*) : ',
+                'required'    => true,
+                'choice_list' => new ChoiceList(
+                    array('International',
+                        'France',
+                        'Auvergne-Rhône-Alpes',
+                        'Bourgogne-Franche-Comté',
+                        'Bretagne',
+                        'Centre-Val de Loire',
+                        'Corse',
+                        'Grand Est',
+                        'Hauts-de-France',
+                        'Île-de-France',
+                        'Normandie',
+                        'Nouvelle-Aquitaine',
+                        'Occitanie',
+                        'Pays de la Loire',
+                        "Provence-Alpes-Côte d'Azur",
+                        'DOM-TOM',
+                        ),
+                    array('International',
+                          'France',
+                          'Auvergne-Rhône-Alpes',
+                          'Bourgogne-Franche-Comté',
+                          'Bretagne',
+                          'Centre-Val de Loire',
+                          'Corse',
+                          'Grand Est',
+                          'Hauts-de-France',
+                          'Île-de-France',
+                          'Normandie',
+                          'Nouvelle-Aquitaine',
+                          'Occitanie',
+                          'Pays de la Loire',
+                          "Provence-Alpes-Côte d'Azur",
+                          'DOM-TOM',
+                        )
+                )))
             ->add('theme', TextType::class, array('label' => 'Thèmes ou Commission : ', 'required'    => false))
             ->add('deadline', DateType::class , array("required" => false,'label' => "Date de l'évènement : ",
                 'widget' => 'single_text',

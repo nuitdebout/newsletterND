@@ -25,7 +25,13 @@
                        <div class="container-fluid">
                             <div class="row">
                               <div class="col-md-4">{{ form_row(form.typeProposition) }}</div>
-                              <div class="col-md-8">{{ form_row(form.title) }}</div>
+                              <div class="col-md-8">{{ form_row(form.lieu) }}</div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">{{ form_row(form.title) }}</div>
                             </div>
                         </div>
 
@@ -41,11 +47,10 @@
                             </div>  
                         </div>
 
-                        <div id="afficheLieu" onclick="admin.afficheLieu()" class="obligatoire btn-ajout"><p >Lieu / Date / Thèmes</p></div>
+                        <div id="afficheLieu" onclick="admin.afficheLieu()" class="obligatoire btn-ajout"><p >Date / Thèmes</p></div>
 
                         <div id="formLieu" class="container-fluid" style="display: none">
                             <div class="row">
-                              <div class="col-md-4">{{ form_row(form.lieu) }}</div>
                               <div class="col-md-4">{{ form_row(form.theme) }}</div>
                               <div class="col-md-4">{{ form_row(form.deadline) }}</div>
                             </div>
@@ -64,8 +69,13 @@
                                         <div class="cadre-upload">{{ form_row(form.documents) }}</div>
                                     </div>
 
-                                    <input type="submit" value="Enregistrez" class="btn btn-primary btn-lg">
+
                             </div>
+                            </div>
+                        </div>
+                        <div class="container-fluid">
+                            <div class="row">
+                                <input type="submit" value="Enregistrez" class="btn btn-primary btn-lg">
                             </div>
                         </div>
                     </form>
@@ -164,6 +174,7 @@
                             <div>Position : {{ key + 1 }}</div>
                             <div id="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
                             <div>{{ item.getTitle }}</div>
+                            <div>{{ item.getLieu }}</div>
                             <div>{{ item.getTeaser }}</div>
                             <div><a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
                             <div>{{ item.getTheme }}</div>
@@ -174,9 +185,15 @@
                                 <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
                             {% endif %}
                             <div id="imgAction">
-                                <a href="{{ path('proposition_monte', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/monte.png') }}"></a>
-                                <a href="{{ path('proposition_descend', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/descend.png') }}"></a>
-                                <a href="{{ path('proposition_interdit', {'id': item.getId}) }}"><img src="{{ asset('bundles/app/images/interdit.png') }}"></a>
+                                <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
+                                    <img src="{{ asset('bundles/app/images/monte.png') }}">
+                                </a>
+                                <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
+                                    <img src="{{ asset('bundles/app/images/descend.png') }}">
+                                </a>
+                                <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
+                                    <img src="{{ asset('bundles/app/images/interdit.png') }}">
+                                </a>
                             </div>
                         </div>
                     {% endfor %}
