@@ -33,9 +33,7 @@ code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break
 #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
 #icon-book { display: none; }
 .imgAction { width: 7%; float: right; text-align: right; padding: inherit;}
-.imgAction img {width: 24px;
-    height: 24px;
-    margin-bottom: 7px;}
+.imgAction img {width: 24px; height: 24px; margin-bottom: 7px;}
 .imgPres img {max-width: 100%;}
 .imgPres {float: left; width:20%;padding: inherit;}
 .textContent {float: left;  width:70%;padding: inherit;}
