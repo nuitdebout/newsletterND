@@ -14,8 +14,10 @@ a:hover { text-decoration: none; }
 code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
 #wrapper { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
 #container { padding: 2em; }
-#cadre { border: 1px solid #ccc;
-    border-radius: 8px;}
+.cadre { border: 1px solid #ccc;
+    border-radius: 8px;  clear: both;    display: inline-table;
+    min-width: 100%; padding:3px;}
+
 #welcome, #status { margin-bottom: 2em; }
 #welcome h1 span {
     display: block;
@@ -30,8 +32,14 @@ code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break
 }
 #icon-status, #icon-book { float: left; height: 64px; margin-right: 1em; margin-top: -4px; width: 64px; }
 #icon-book { display: none; }
-#imgAction img {width: 40px; height: 40px;}
-#imgPres img {width: 240px; height: 140px;}
+.imgAction { width: 7%; float: right; text-align: right; padding: inherit;}
+.imgAction img {width: 24px;
+    height: 24px;
+    margin-bottom: 7px;}
+.imgPres img {max-width: 100%;}
+.imgPres {float: left; width:20%;padding: inherit;}
+.textContent {float: left;  width:70%;padding: inherit;}
+.position {float: left; width:3%;padding: inherit;}
 
 @media (min-width: 768px) {
     #wrapper { width: 80%; margin: 2em auto; }
