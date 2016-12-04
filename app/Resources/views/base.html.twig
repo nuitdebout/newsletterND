@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}Newsletter participative de Nuit Debout<sup>beta</sup>{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" href="{{ asset('bundles/app/css/newsletter.css') }}">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
