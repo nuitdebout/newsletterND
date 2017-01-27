@@ -1,91 +1,92 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Newsletter participative<br>de Nuit Debout <sup>beta</sup></span></h1>
-            </div>
-            <div id="next">
+<div id="wrapper">
+    <div id="container">
+        <div id="welcome">
+            <h1><span>Communiquez sur la newsletter de Nuit Debout fcdvcd </span></h1>
+        </div>
+
+        <div id="next">
             <p class="bg-info">
                 Cet outil est en cours de développement.<br>
                 Suggestions, impressions, bugs : <a href="https://pad.bombastus.duckdns.org/OwMwTAzARiDGAMBaMsCcAORAWMBTJU8YIi6u5AjPFLAGwUxA" target="_blank">écrivez sur ce document</a>
-                </p>
-            </div>
+            </p>
+        </div>
 
-            <div id="next">
-                <h2>Proposez vos articles</h2>
-                <div id="cadre">
-                    <div class="obligatoire btn-ajout">(*) = champ obligatoire</div>
-                    <form id="formProposition" class="form-group" action="#" method="post" name="proposition" {{ form_enctype(form) }}>
-                        
-                        {{ form_errors(form) }}
-                        {{ form_row (form._token) }}
+        <div>
+            <p>Proposez vos articles, votez pour les contenus les plus importants, contrez les contenus les inappropriés</p>
+            <div id="class">
+                <div class="obligatoire btn-ajout">(*) = champ obligatoire</div>
+                <form id="formProposition" class="form-group" action="#" method="post" name="proposition" {{ form_enctype(form) }}>
 
-                       <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-md-4">{{ form_row(form.typeProposition) }}</div>
-                              <div class="col-md-4">{{ form_row(form.lieu) }}</div>
-                              <div class="col-md-4">{{ form_row(form.theme) }}</div>
+                    {{ form_errors(form) }}
+                    {{ form_row (form._token) }}
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-4">{{ form_row(form.typeProposition) }}</div>
+                            <div class="col-md-4">{{ form_row(form.lieu) }}</div>
+                            <div class="col-md-4">{{ form_row(form.theme) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">{{ form_row(form.title) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">{{ form_row(form.teaser) }}</div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_row(form.url) }}
+                                <div class="large-3 end columns">
+                                    <a id="id_attach" class="button postfix">Preview</a>
+                                </div>
+                            </div>
+                            <!-- Placeholder that tells Preview where to put the selector-->
+                            <div class="selector-wrapper"></div>
+                        </div>
+                    </div>
+
+                    <div id="afficheLieu" onclick="admin.afficheLieu()" class="obligatoire btn-ajout"><p >Date</p></div>
+
+                    <div id="formLieu" class="container-fluid" style="display: none">
+                        <div class="row">
+                            <div class="col-md-4">{{ form_row(form.deadline) }}</div>
+                        </div>
+                    </div>
+
+                    <div id="afficheDoc" onclick="admin.afficheDoc()" class="obligatoire btn-ajout"><p>Description / Documents(photos)</p></div>
+
+                    <div id="formDoc" class="container-fluid" style="display: none">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{ form_row(form.description) }}
+
+                                <div id="ajoutDoc"><IMG class="imagePlus" src="{{ asset('bundles/app/images/plus.png') }}" alt="ajout document" /> Cliquer ici pour ajouter des documents</div>
+
+                                <div class="form-document">
+                                    <div class="cadre-upload">{{ form_row(form.documents) }}</div>
+                                </div>
+
+
                             </div>
                         </div>
-
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">{{ form_row(form.title) }}</div>
-                            </div>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <input type="submit" value="Enregistrez" class="btn btn-primary btn-lg">
                         </div>
-
-                        <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-md-12">{{ form_row(form.teaser) }}</div>
-                            </div>  
-                        </div>
-
-                        <div class="container-fluid">
-                            <div class="row">
-                              <div class="col-md-12">
-                                  {{ form_row(form.url) }}
-                                  <div class="large-3 end columns">
-                                      <a id="id_attach" class="button postfix">Preview</a>
-                                  </div>
-                              </div>
-                                <!-- Placeholder that tells Preview where to put the selector-->
-                                <div class="selector-wrapper"></div>
-                            </div>  
-                        </div>
-
-                        <div id="afficheLieu" onclick="admin.afficheLieu()" class="obligatoire btn-ajout"><p >Date</p></div>
-
-                        <div id="formLieu" class="container-fluid" style="display: none">
-                            <div class="row">
-                              <div class="col-md-4">{{ form_row(form.deadline) }}</div>
-                            </div>
-                        </div>
-
-                        <div id="afficheDoc" onclick="admin.afficheDoc()" class="obligatoire btn-ajout"><p>Description / Documents(photos)</p></div>
-
-                        <div id="formDoc" class="container-fluid" style="display: none">
-                            <div class="row">
-                              <div class="col-md-12">
-                                    {{ form_row(form.description) }}
-
-                                    <div id="ajoutDoc"><IMG class="imagePlus" src="{{ asset('bundles/app/images/plus.png') }}" alt="ajout document" /> Cliquer ici pour ajouter des documents</div>
-
-                                    <div class="form-document">
-                                        <div class="cadre-upload">{{ form_row(form.documents) }}</div>
-                                    </div>
-
-
-                            </div>
-                            </div>
-                        </div>
-                        <div class="container-fluid">
-                            <div class="row">
-                                <input type="submit" value="Enregistrez" class="btn btn-primary btn-lg">
-                            </div>
-                        </div>
-                    </form>
+                    </div>
+                </form>
                     <script type="text/javascript">
 
                         $(document).ready(function() {
@@ -166,16 +167,43 @@
 
                         });
                     </script>
-                </div>
             </div>
-            <div id="next">
-            <h2>Votez pour organiser les contenus</h2>
-                <h4>Prochaine Newsletter (envoi prévu le 1er décembre 2016)</h4>
-                <p><a href="#">Voir la newsletter précedente</a> </p>
+        </div>
+        <div id="mea">
+            <h3>Prochaine Newsletter (envoi prévu le 1er décembre 2016)</h3>
+            <a href="#" class="prev-news">Voir la newsletter précedente</a>
+
+            <div>
+
+                <span style="display: block; text-align: center; font-size: 16px;">Vous êtes inscrit sur la liste de diffusion de nuitdebout, pour être retiré des listes <a href="#" style="color: #000000;">cliquez ici</a></span>
+                <div id="welcome" style="position: relative; height:100px; border-bottom: 1px solid #dddddd;">
+                    <h1 style="float: left;" title="Nuit debout - newsletter"><img src="{{ asset('bundles/app/images/title.png') }}"></h1>
+                    <ul style="list-style: none; position: absolute; top: 25px; right: 0;">
+                        <li style="float: left; margin-left: 5px;">
+                            <a href="https://nuitdebout.fr/" target="_blank"><img src="{{ asset('bundles/app/images/earth.png') }}"></a>
+                        </li>
+                        <li style="float: left; margin-left: 5px;">
+                            <a href="https://wiki.nuitdebout.fr/wiki/Accueil" target="_blank"><img src="{{ asset('bundles/app/images/W.png') }}"></a>
+                        </li>
+                        <li style="float: left; margin-left: 5px;">
+                            <a href="https://pad.scryk.net/s/B1Cm2ETll" target="_blank"><img src="{{ asset('bundles/app/images/bulle.png') }}"></a>
+                        </li>
+                        <li style="float: left; margin-left: 5px;">
+                            <a href="https://www.facebook.com/NuitDebout" target="_blank"><img src="{{ asset('bundles/app/images/facebook.png') }}"></a>
+                        </li>
+                        <li style="float: left; margin-left: 5px;">
+                            <a href="https://twitter.com/nuitdebout" target="_blank"><img src="{{ asset('bundles/app/images/twitter.png') }}"></a>
+                        </li>
+                    </ul>
+                </div>
 
 
                 {% if arrayProposition|length > 0 %}
-                    {% for key, item in arrayProposition %}
+
+                <div id="mea">
+                    <h3 style="font-size: 30px">Top de l'actu</h3>
+                    {% if propTop|length > 0 %}
+                        {% for key, item in propTop %}
 
                         {% set cheminDoc = "" %}
                         {% set break = false %}
@@ -187,44 +215,189 @@
                             {% endif %}
                         {% endfor %}
 
-                        <div class="cadre">
-                            <div class="position">#{{ key + 1 }}</div>
-                            <div class="imgPres"><img src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}"></div>
+                        <div style="position: relative; padding: 10px 12px 5px; border: 1px solid #000; min-height: 100px; margin-bottom: 20px;">
+                            <img style="float: left; height: 70px; width: 90px; margin-right: 15px;" src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}">
+                            <h4 style="margin: 0; font-size: 24px !important; line-height: 0.8em; font-weight: bold;">{{ item.getTitle }}</h4>
+                            <p style=" margin: 0.5em 0 0; font-size: 16px !important; line-height: 1.3; min-height: 43px;">{{ item.getTeaser }}</p>
+                            <a href="{{ item.getUrl }}" target="_blank" style="margin-left: 105px; line-height: 1.2em; font-size: 16px !important; color: #000000;">Lien</a>
+                            <div id='desc0_sp' onclick='admin.afficheDesc("desc0")'><span class="place">{{ item.getLieu }}</span><span>-</span><span class="topic">{{ item.getTheme }}</span></div>
 
-                            <div class="textContent">
-                                <div>{{ item.getTitle }}</div>
-                                <div>{{ item.getTheme }}</div>
-                                <div>{{ item.getLieu }}</div>
-                                <div>{{ item.getTeaser }}</div>
-                                <div><a href="{{ item.getUrl }}" target="_blank">Lien</a></div>
-                                <div>{{ item.getTheme }}</div>
-                                {% if item.getDescription|length > 0 %}
-                                    {% set idDesc = 'desc' ~ key %}
-                                    <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
-                                    <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
-                                    <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
-                                {% endif %}
-                            </div>
+                            {% if item.getDescription|length > 0 %}
+                                {% set idDesc = 'desc' ~ key %}
+                                <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
+                                <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
+                                <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
+                            {% endif %}
+
                             <div class="imgAction">
-                                <div class="voteButton">
-                                    <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
-                                        <img src="{{ asset('bundles/app/images/monte.png') }}">
-                                    </a></div>
-                                <div class="voteButton">
-                                    <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
-                                        <img src="{{ asset('bundles/app/images/descend.png') }}">
-                                    </a></div>
-                                <div class="voteButton">
-                                    <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
-                                        <img src="{{ asset('bundles/app/images/interdit.png') }}">
-                                    </a></div>
+                                <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
+                                    <img src="{{ asset('bundles/app/images/thumb-up.png') }}">
+                                </a>
+                                <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
+                                    <img src="{{ asset('bundles/app/images/thumb-down.png') }}">
+                                </a>
+                                <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
+                                    <img src="{{ asset('bundles/app/images/ban.png') }}">
+                                </a>
                             </div>
+
                         </div>
 
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+
+                <table>
+                    <tr>
+                        <td valign="top" style="width: 33%; border-right: 1px solid #000000;">
+                            <h3 style="font-size: 30px; text-align: center;">Agenda</h3>
+
+                            {% if propTopAgenda|length > 0 %}
+                                    {% for key, item in propTopAgenda %}
+
+                                    <div style="position: relative; padding: 10px 12px 5px; margin-bottom: 10px;">
+                                        <a href="{{ item.getUrl }}" target="_blank" style="text-decoration: none; color: #000000;">
+                                            <h4 style="margin: 0; font-size: 14px !important; line-height: 1.1em;font-weight: bold;">{{ item.getTitle }}</h4>
+                                            <p style=" margin: 0.5em 0 0; font-size: 14px !important; line-height: 1.3; min-height: 43px; font-weight: normal;">{{ item.getTeaser }}</p>
+                                        </a>
+                                        <div class="imgAction">
+                                            <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
+                                                <img src="{{ asset('bundles/app/images/thumb-up.png') }}">
+                                            </a>
+                                            <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
+                                                <img src="{{ asset('bundles/app/images/thumb-down.png') }}">
+                                            </a>
+                                            <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
+                                                <img src="{{ asset('bundles/app/images/ban.png') }}">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            {% endif %}
+
+
+                        </td>
+                        <td valign="top" style="width: 33%; border-right: 1px solid #000000;">
+                            <h3 style="font-size: 30px; text-align: center;">Actions</h3>
+                            {% if propTopAction|length > 0 %}
+                                {% for key, item in propTopAction %}
+
+                                    <div style="position: relative; padding: 10px 12px 5px; margin-bottom: 10px;">
+                                        <a href="{{ item.getUrl }}" target="_blank" style="text-decoration: none; color: #000000;">
+                                            <h4 style="margin: 0; font-size: 14px !important; line-height: 1.1em;font-weight: bold;">{{ item.getTitle }}</h4>
+                                            <p style=" margin: 0.5em 0 0; font-size: 14px !important; line-height: 1.3; min-height: 43px; font-weight: normal;">{{ item.getTeaser }}</p>
+                                        </a>
+                                        <div class="imgAction">
+                                            <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
+                                                <img src="{{ asset('bundles/app/images/thumb-up.png') }}">
+                                            </a>
+                                            <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
+                                                <img src="{{ asset('bundles/app/images/thumb-down.png') }}">
+                                            </a>
+                                            <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
+                                                <img src="{{ asset('bundles/app/images/ban.png') }}">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                        <td valign="top" style="width: 33%;">
+                            <h3 style="font-size: 30px; text-align: center;">News</h3>
+                            {% if propTopArticle|length > 0 %}
+                                {% for key, item in propTopArticle %}
+
+                                    <div style="position: relative; padding: 10px 12px 5px; margin-bottom: 10px;">
+                                        <a href="{{ item.getUrl }}" target="_blank" style="text-decoration: none; color: #000000;">
+                                            <h4 style="margin: 0; font-size: 14px !important; line-height: 1.1em;font-weight: bold;">{{ item.getTitle }}</h4>
+                                            <p style=" margin: 0.5em 0 0; font-size: 14px !important; line-height: 1.3; min-height: 43px; font-weight: normal;">{{ item.getTeaser }}</p>
+                                        </a>
+                                        <div class="imgAction">
+                                            <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
+                                                <img src="{{ asset('bundles/app/images/thumb-up.png') }}">
+                                            </a>
+                                            <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
+                                                <img src="{{ asset('bundles/app/images/thumb-down.png') }}">
+                                            </a>
+                                            <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
+                                                <img src="{{ asset('bundles/app/images/ban.png') }}">
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                {% endfor %}
+                            {% endif %}
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+
+
+            <br /><br />
+
+
+            {% if arrayProposition|length > 15 %}
+
+                {% for key, item in arrayProposition %}
+
+                    {% set cheminDoc = "" %}
+                    {% set break = false %}
+                    {% for document in item.getDocuments if not break %}
+                        {% set ext = document.getWebDoc|split('.') %}
+                        {% if ext[1] == "jpeg" or ext[1] == "png" %}
+                            {% set cheminDoc = document.getWebDoc %}
+                            {% set break = true %}
+                        {% endif %}
                     {% endfor %}
+
+            {% if key > 14 %}
+
+            <div class="cadre">
+                <div class="score">
+                    <span>Position</span>
+                    <span class="number">{{ key + 1 }}</span>
+                </div>
+                <img class="imgPres" src="{% if cheminDoc != "" %}{{ asset(cheminDoc) }}{% else %}{{ asset('bundles/app/images/pasimage.png') }}{% endif %}">
+                <h4>{{ item.getTitle }}</h4>
+                <p>{{ item.getTeaser }}</p>
+                <a href="{{ item.getUrl }}" target="_blank" class="link">Lien</a>
+                <div id='desc0_sp' onclick='admin.afficheDesc("desc0")'><span class="place">{{ item.getLieu }}</span><span>-</span><span class="topic">{{ item.getTheme }}</span></div>
+
+                {% if item.getDescription|length > 0 %}
+                    {% set idDesc = 'desc' ~ key %}
+                    <div id='{{ idDesc }}_sp' onclick='admin.afficheDesc("{{ idDesc }}")'><p >En savoir plus</p></div>
+                    <div id="{{ idDesc }}" style="display: none"><p>{{  item.getDescription|raw }}</p></div>
+                    <div id='{{ idDesc }}_r' onclick='admin.cacheDesc("{{ idDesc }}")' style="display: none"><p >Réduire</p></div>
                 {% endif %}
 
-             </div>
+                <div class="imgAction">
+                        <a href="{{ path('proposition_monte', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire monter la proposition">
+                            <img src="{{ asset('bundles/app/images/thumb-up.png') }}">
+                        </a>
+                        <a href="{{ path('proposition_descend', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire desencdre la proposition">
+                            <img src="{{ asset('bundles/app/images/thumb-down.png') }}">
+                        </a>
+                        <a href="{{ path('proposition_interdit', {'id': item.getId}) }}" data-toggle="tooltip" title="Faire annuler la proposition">
+                            <img src="{{ asset('bundles/app/images/ban.png') }}">
+                        </a>
+                </div>
+            </div>
+
+
+            {% endif %}
+                {% endfor %}
+
+            {% endif %}
+
+            {% endif %}
+
         </div>
     </div>
+</div>
 {% endblock %}
+

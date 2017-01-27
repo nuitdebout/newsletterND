@@ -163,10 +163,37 @@ class DefaultController extends Controller
 
 
 
+        $top = 3;
+        $limite = 4;
+        $propTop = array();
+        $propTopAgenda = array();
+        $propTopAction = array();
+        $propTopArticle = array();
+
+        foreach ($arrayProposition as $key => $prop) {
+
+            if(count($propTop) <= $top && count($propTopAgenda) <= $limite && count($propTopAction) <= $limite && count($propTopArticle) <= $limite){
+                if($key < $top){
+                    $propTop[] = $prop;
+                }else{
+                    switch($prop->getTypeProposition()){
+                        case 1:if(count($propTopAgenda) < $limite)$propTopAgenda[]= $prop;break;
+                        case 2:if(count($propTopAction) < $limite)$propTopAction[]= $prop;break;
+                        case 3:if(count($propTopArticle) < $limite)$propTopArticle[]= $prop;break;
+                        default:break;
+                    }
+                }
+            }else{continue;}
+        }
+
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'form' => $form->createView(),
             'arrayProposition' => $arrayProposition,
+            'propTop' => $propTop,
+            'propTopAgenda' => $propTopAgenda,
+            'propTopAction' => $propTopAction,
+            'propTopArticle' => $propTopArticle
         ));
     }
 
