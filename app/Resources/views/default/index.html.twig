@@ -44,7 +44,14 @@
 
                         <div class="container-fluid">
                             <div class="row">
-                              <div class="col-md-12">{{ form_row(form.url) }}</div>
+                              <div class="col-md-12">
+                                  {{ form_row(form.url) }}
+                                  <div class="large-3 end columns">
+                                      <a id="id_attach" class="button postfix">Preview</a>
+                                  </div>
+                              </div>
+                                <!-- Placeholder that tells Preview where to put the selector-->
+                                <div class="selector-wrapper"></div>
                             </div>  
                         </div>
 
@@ -82,6 +89,16 @@
                     <script type="text/javascript">
 
                         $(document).ready(function() {
+
+                            // Ajout du listener sur le clic du lien
+                            $('#id_attach').click(function() {
+
+                                $.get($('#form_url').val() , function(data) {
+                                    var content = $(data).filter('meta[name=adescription]').attr("content");
+                                    alert(content );
+                                });
+                            });
+
 
                             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
                             var $container = $('div#form_documents');

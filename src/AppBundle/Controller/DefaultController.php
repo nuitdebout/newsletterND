@@ -29,7 +29,13 @@ class DefaultController extends Controller
         $form = $this->createFormBuilder($proposition)
             ->add('title', TextType::class, array('label' => 'Titre(*) : ', 'required'    => true))
             ->add('teaser', TextType::class, array('label' => 'Teaser(*) (140 caractères) : ', 'required'    => true))
-            ->add('url', TextType::class, array('label' => 'Lien à partager(*) : ', 'required'    => true))
+            ->add('url', TextType::class, array(
+                'label' => 'Lien à partager(*) : ',
+                'required'    => true,
+                'attr' => array(
+                    'id' => 'url',
+                    'name' => 'url'
+                )))
             ->add('typeProposition', ChoiceType::class, array(
                 'label' => 'Type de proposition(*) : ',
                 'required'    => true,
@@ -154,6 +160,8 @@ class DefaultController extends Controller
         }
 
         $arrayProposition = $this->getDoctrine()->getRepository('AppBundle:Proposition')->findBy(array("active" => true), array('ordre' => 'DESC'));
+
+
 
         return $this->render('default/index.html.twig', array(
             'base_dir' => realpath($this->container->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
